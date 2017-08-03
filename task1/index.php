@@ -2,16 +2,11 @@
 
 include ('config.php');
 include ('libs/function.php');
+
+$file_exis = file_exis();
+$upload = upload();
+$file_del = file_delete();
+$arr = get_files();
+
 include ('templates/index.php');
- 
- //var_dump($_POST);
-//var_dump($_GET['uploadfile']);
-//$uploadResult = upload();
-
-
-
-
-$res = table_files($aFiles);
-echo $res;
-
 ?>

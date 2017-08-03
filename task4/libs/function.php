@@ -3,32 +3,41 @@
 
 class Suid 
 {
+    public $selected;
 
-    public $result_db = '';
-    public $array = '';
- 
     public function __construct()
     {
-        mysql_connect(DB_HOST, DB_LOGIN, DB_PASS);
-        mysql_select_db(DB_NAME);
+        mysql_connect(DB_HOST_SQL, DB_LOGIN_SQL, DB_PASS_SQL);
+        mysql_select_db(DB_NAME_SQL);
     }
-
     public function author() 
-{
-	$query = "SELECT id,author FROM authors";
-	$result = mysql_query($query);
-    return $this;
-
-}
-
+    {
+        $query = "SELECT `key` FROM mytest";
+        $result = mysql_query($query);
+        if( $result )
+        {
+            return mysql_fetch_assoc($result);
+        }
+        return false;
+    }
+    public function exec ()
+    {
+        $sql = $this->select($select).$this->from($from);
+        $result = mysql_query($sql);
+        if( $result )
+        {
+            return mysql_fetch_assoc($result);
+        }
+        return false;
+    }
     public function select ($select)
     {
-        $query = 'SELECT '.$select;
+        $query = 'SELECT '.`$select`;
         return $this;
     }
     public function from ($from)
     {
-        $query = 'FROM'.$from;
+        $query .= ' FROM '.$from;
         return $this;
     }
     public function where ($where)
@@ -51,26 +60,5 @@ class Pgsql extends Suid
 {
 
 }
-/*
-$conn = new Suid;
-
-$conn->dbConnect();
-
-$conn->select('*')->from('MY_TEST')->total();
-
-
-
-
-$db = mysql_connect('user1','user1','tuser1');
-mysql_select_db('MY_TEST',$db);
-
-
-$result = mysql_query('SELECT * FROM MY_TEST',$db);
-*/
-
-
-
-
-
 
 ?>

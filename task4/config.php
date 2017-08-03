@@ -1,6 +1,11 @@
 <?php
-define ("DB_HOST", "book.pc"); // константа имени хостинга
-define ("DB_LOGIN", "root"); // константа имени пользователя
-define ("DB_PASS", ""); // константа пароля
-define ("DB_NAME", "booker"); // константа имени базы данных
-?>
+define ("DB_HOST_SQL", "localhost");
+define ("DB_LOGIN_SQL", "root");
+define ("DB_PASS_SQL", "");
+define ("DB_NAME_SQL", "user1");
+
+define ("DB_HOST", "book.pc");
+define ("DB_LOGIN", "root");
+define ("DB_PASS", "");
+define ("DB_NAME", "booker");
+?>  

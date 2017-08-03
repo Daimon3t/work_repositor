@@ -6,28 +6,69 @@ class Calculator
     private $two;
     private $save_int;
 
-    public function __construct($one, $two)
+    public function __construct($one, $two, $save_int = 0)
     {
         $this->one = $one;
         $this->two = $two;
+        $this->save_int = $save_int;
     }
-/*
     public function result($operator)
     {
-        case '+':
-            return $this->pluse($this->one,$this->two);
+        switch($operator) 
+        {
+            case '+':
+                return $this->plus($this->one,$this->two);
+                break;
+            case '-':
+                return $this->minus($this->one,$this->two);
+                break;
+            case '*':
+                return $this->multi($this->one,$this->two);
+                break;
+            case '/':
+                return $this->delenie($this->one,$this->two);
+                break;
+            case '%':
+                return $this->procent($this->one,$this->two);
+                break;
+        }
+    }    
+    public function calculate() {
+    $data = ['result' => 0, 'memory' => 0];
+    if (empty($_POST['send'])) {
+        return $data;
+    }
+    $one = $_POST['field_1'];
+    $two = $_POST['field_2'];
+    $operator = $_POST['operator'];
+    $memory = $_POST['memory'];
+
+    $calcul = new Calculator ($one, $two, $memory);
+
+    switch($_POST['send']) 
+    {
+        case '=':
+            $data['result'] = $calcul->result($operator);
             break;
-        case '-':
-            return $this->minus($this->one,$this->two);
+        case 'M+': 
+            $data['result'] = $calcul->m_plus();
             break;
-        case '*':
-            return $this->multi($this->one,$this->two);
+        case 'M-':
+            $data['result'] = $calcul->m_minus();
             break;
-        case '/':
-            return $this->delenie($this->one,$this->two);
+        case 'MR':
+            $data['result'] = $calcul->mr();
+            break; 
+        case 'MC':
+            $data['memory'] = $calcul->mc();
+            break;
+        case '√':
+            $data['result'] = $calcul->sqrt();
             break;
     }
- */  
+    $data['memory'] = $calcul->memory();
+    return $data;
+    } 
     public function plus ()
     {
         return $this->one + $this->two; 
@@ -46,38 +87,33 @@ class Calculator
     }
     public function m_plus ()
     {
-        if ($this->save_int == 0)
-        {
-            return $this->save_int = $this->one;
-        }
-        else {
-            return $this->save_int + $this->one;
-        }
+        return $this->save_int = $this->save_int + $this->one;
     }
     public function m_minus ()
     {
-        if ($this->save_int != 0)
-        {
-            return $this->save_int - $this->one;
-        }
-        else {
-            exit;
-        }
+        return $this->save_int = $this->save_int - $this->one;
+    }
+    public function memory ()
+    {
+        return $this->save_int;
     }
     public function mr ()
     {
-        echo $this->save_int;
+        return $this->save_int = $this->one;
     }
     public function mc ()
     {
-        $this->save_int = 0;
+        return $this->save_int = 0;
     }
     public function procent ()
     {
-        return $this->one / 100 * $this->two;
+        $res = $this->one = $this->one * $this->two;
+        return $res / 100;
     }
-    
-
+    public function sqrt ()
+    {
+        return sqrt($this->one);
+    }
 }
 
 

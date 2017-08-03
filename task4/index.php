@@ -3,11 +3,12 @@ include ('libs/function.php');
 include ('config.php');
 
 
-$conn = new Suid();
-
-$res = $conn->author();
-
-var_dump($res);
+$suid = new Suid();
+//$asdas = $suid->author();
+//$asdasasda = $suid->insert();
+//$res = $conn->author();
+$sel = $suid->select(data)->from(mytest)->exec();
+var_dump($sel);
 
 
 
